@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Button, StyleSheet, } from "react-native";
-import styles from './Styles'
+import styles from './Style'
 class UserHomeScreen extends React.Component {
 	render() 
 	{

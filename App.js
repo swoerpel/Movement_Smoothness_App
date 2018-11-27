@@ -12,7 +12,6 @@ import AdminHomeScreen from './screens/AdminHomeScreen'
 const RootStack = createStackNavigator(
   {
     'Home': HomeScreen,
-    //'Details': DetailsScreen
 	'UserHome': UserHomeScreen,
 	'AdminHome': AdminHomeScreen,
   },

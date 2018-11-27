@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 import {Alert, StyleSheet, TouchableHighlight, ScrollView, TouchableOpacity} from 'react-native';
-import styles from './Styles'
+import styles from './Style'
 class HomeScreen extends React.Component 
 {
 	render() 

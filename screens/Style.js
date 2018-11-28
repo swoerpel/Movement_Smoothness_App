@@ -48,14 +48,11 @@ import { StyleSheet } from 'react-native';
 	  fontSize: 20,
 	  paddingTop: 10,
 	  //color: '#F1F1EC',
-
   },
    button_text: {
 	  textAlign: 'center',
 	  fontSize: 20,
-
 	  //color: '#F1F1EC',
-
   },
   user_button:{
     alignItems: 'center',
@@ -63,7 +60,6 @@ import { StyleSheet } from 'react-native';
     padding: 20,
 	margin: 5,
 	width: 300,
-
   },
 
 }); 

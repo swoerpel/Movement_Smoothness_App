@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity} from "react-native";
 import styles from './Style'
+
 class AdminHomeScreen extends React.Component {
 	render() 
 	{
@@ -17,7 +18,9 @@ class AdminHomeScreen extends React.Component {
 
 				</View>
 				<View style={styles.footer_view}>
-				
+					<TouchableOpacity style={styles.user_button} onPress={() => this.props.navigation.navigate('CreateNewTest')}>
+						<Text style={styles.button_text}>Create New Test</Text>
+					</TouchableOpacity>
 				</View>
 
 			</View>

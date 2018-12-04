@@ -4,20 +4,21 @@ import { withNavigation } from 'react-navigation';
 
 class TestListRow extends React.Component {
   render() {
-    const { testItem } = this.props;
+    const { testItem,testIndex } = this.props;
     return (
       <React.Fragment>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('test_info_screen',
             {
-              testID: testItem.testID,
+              testID: testIndex,
               testName: testItem.testName,
 
             }
           )}>
+		  
           <View style={styles.row}>
             <View style={styles.nameAndNumber}>
-              <Text style={styles.testID}>{testItem.testID}</Text>
+              <Text style={styles.testID}>{testIndex}</Text>
               <Text style={styles.testName}>{testItem.testName}</Text>
             </View>
 
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
   row: {
     padding: 15,
     justifyContent: 'space-evenly',
+	backgroundColor: '#5b9095'
   },
 
   nameAndNumber: {

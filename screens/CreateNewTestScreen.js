@@ -10,12 +10,24 @@ class CreateNewTestScreen extends React.Component {
 	{
 		super(props)
 		this.state = {
-			duration_label:"S"
+			testID:0,
+			testName:"Cheet",
+			testDuration:"default",
+			testTrials:"default",
+			testDescription:"default"
 		}
 
 		console.log(this.state.duration_label)
 	}
 
+	addTest = () => {
+
+		this.props.navigation.navigate('Test List')
+		console.log(this.props.screenProps.testList.length)
+		console.log(this.props.screenProps.testList)
+		
+		this.props.screenProps.addTestToList(this.state)
+	}
 	
 	render() 
 	{
@@ -32,8 +44,8 @@ class CreateNewTestScreen extends React.Component {
 						  onChangeText={(testName) => this.setState({ testName })}
 						  value={this.state.testName}
 						  placeholder='Test Name'
-						  onSubmitEditing={() => this.durationRef.focus()}
-						  returnKeyType='next'
+						  //onSubmitEditing={() => this.durationRef.focus()}
+						  returnKeyType='done'
 						/>
 
 					<TextInput
@@ -42,8 +54,8 @@ class CreateNewTestScreen extends React.Component {
 						  onChangeText={(testDuration) => this.setState({ testDuration })}
 						  value={this.state.testDuration}
 						  placeholder='Duration'
-						  onSubmitEditing={() => this.trialsRef.focus()}
-						  returnKeyType='next'
+						  //onSubmitEditing={() => this.trialsRef.focus()}
+						  returnKeyType='done'
 						/>
 						
 					<TextInput
@@ -52,8 +64,8 @@ class CreateNewTestScreen extends React.Component {
 						  onChangeText={(testTrials) => this.setState({ testTrials })}
 						  value={this.state.testTrials}
 						  placeholder='Trials Required'
-						  onSubmitEditing={() => this.descriptionRef.focus()}
-						  returnKeyType='next'
+						  //onSubmitEditing={() => this.descriptionRef.focus()}
+						  returnKeyType='done'
 						/>
 						
 					<TextInput
@@ -69,8 +81,8 @@ class CreateNewTestScreen extends React.Component {
 								
 								
 					<TouchableOpacity
-						onPress={this.loginAdmin}
-						style={styles.user_button}
+						onPress={this.addTest}
+						style={styles.add_test_button}
 						activeOpacity={1}
 						>
 
@@ -97,15 +109,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 26,
   },
-  user_button: {
+  add_test_button: {
     height: MARGIN,
     width: '100%',
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
+    marginTop: 20,
     zIndex: 100,
-    backgroundColor: '#38d39f'
+    backgroundColor: '#3c6989'
   },
   button_text: {
     fontWeight: '600',

@@ -17,3 +17,9 @@ class TestInfoScreen extends React.Component
 }
 export default TestInfoScreen
 
+const styles = StyleSheet.create({
+	container:
+	{
+		flex:1
+	}
+})

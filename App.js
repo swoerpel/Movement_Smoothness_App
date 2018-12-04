@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from "react-navigation";
 
 import SelectUserScreen from './screens/SelectUserScreen'
@@ -7,6 +7,14 @@ import AdminTestListScreen from './screens/AdminTestListScreen'
 
 import CreateNewTestScreen from './screens/CreateNewTestScreen'
 import TestInfoScreen from './screens/TestInfoScreen'
+
+const styles = StyleSheet.create({
+	tab_text: 
+	{
+		fontWeight: '600',
+		color: 'black'
+	},
+})
 
 
 const testListNavigator = createStackNavigator(
@@ -28,12 +36,41 @@ testListNavigator.navigationOptions = ({navigation}) => {
 
 const adminTabNavigator = createBottomTabNavigator(
 {
-	'Test List': testListNavigator, //Tests that hold all created tests
-	'Add Test': CreateNewTestScreen  //for initially creating tests, tabs are visible
+	'Test List': 
+	{
+		screen: testListNavigator, //Tests that hold all created tests
+		navigationOptions:
+		{
+			tabBarLabel: (<View style={{alignItems:'center', justifyContent:'center', paddingBottom: 12}}>
+							<Text style={styles.tab_text}>Test List</Text></View>),
+
+		}
+	},
+	'Add Test': 
+	{
+		screen: CreateNewTestScreen,  //for initially creating tests, tabs are visible
+		navigationOptions:
+		{
+			tabBarLabel: (<View style={{alignItems:'center', justifyContent:'center', paddingBottom: 12}}>
+							<Text style={styles.tab_text}>Add Test</Text></View>)
+		},
+
+
+	}
 	
 },
 {
-	initialRouteName: 'Test List'
+	initialRouteName: 'Test List',
+	tabBarOptions: 
+	{
+		activeBackgroundColor:'#b9b9a4',
+		//tabStyle:
+		//{
+		//	backgroundColor: 'black'
+		//}
+		
+	}
+
 });
 
 const selectUserStackNavigator = createStackNavigator(
@@ -60,16 +97,25 @@ export default class App extends React.Component
 			testList: 
 			[
 			{
-				testID: 1,
-				testName: 'Chetting Around'
+				testID:1,
+				testName:"Chetting Around",
+				testDuration:"default",
+				testTrials:"default",
+				testDescription:"default"
 			},
 			{
-				testID: 2,
-				testName: 'Getting Chetted'
+				testID:2,
+				testName:"Chetack",
+				testDuration:"default",
+				testTrials:"default",
+				testDescription:"default"
 			},
 			{
-				testID: 3,
-				testName: 'Chetlapalouza'
+				testID:3,
+				testName:"Chetlupa",
+				testDuration:"default",
+				testTrials:"default",
+				testDescription:"default"
 			},
 			]
 		}
@@ -77,14 +123,22 @@ export default class App extends React.Component
 	}
 	
 	addTestToList = (newTest) => {
-		//this.setState(prevState => ({
-		//	testList:[...prevState.testList, newTest]
-		//}))
+		//newTest.testID = this.state.testList.length + 1
+		this.setState(prevState => (
+		{
+			testList:[...prevState.testList, newTest]
+		}))
 	}
 	
 	render()
 	{
-		return <AppContainer screenProps={{testList: this.state.testList}} />
+		return <AppContainer 
+				screenProps={
+					{
+						testList: this.state.testList,
+						addTestToList: this.addTestToList
+					}} />
 	}
 	
 }
+

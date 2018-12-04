@@ -1,35 +1,90 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
-//import HomeScreen from './screens/HomeScreen'
-//import DetailsScreen from './screens/DetailsScreen'
-import HomeScreen from './screens/HomeScreen'
-import UserHomeScreen from './screens/UserHomeScreen'
-import AdminHomeScreen from './screens/AdminHomeScreen'
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from "react-navigation";
+
+import SelectUserScreen from './screens/SelectUserScreen'
+import AdminTestListScreen from './screens/AdminTestListScreen'
+
 import CreateNewTestScreen from './screens/CreateNewTestScreen'
+import TestInfoScreen from './screens/TestInfoScreen'
 
 
+const testListNavigator = createStackNavigator(
+{
+	'test_list_tab': AdminTestListScreen,
+	'test_info_screen': TestInfoScreen,
+	'edit_test_screen': CreateNewTestScreen, //for editing existing tests, tabs are hidden when navigating from this page
+},
+{
+	initialRouteName: 'test_list_tab'
+});
 
-const RootStack = createStackNavigator(
-  {
-    'Home': HomeScreen,
-	'UserHome': UserHomeScreen,
-	'AdminHome': AdminHomeScreen,
-	'CreateNewTest':CreateNewTestScreen,
-  },
-  {
-    initialRouteName: 'Home'
-  }
-);
+testListNavigator.navigationOptions = ({navigation}) => {
+	//let tabbarVisible = true;
+	//if (navigation.state.index > 0)
+	//	tabBarVisible = false
+	//return{tabBarVisible}
+}
+
+const adminTabNavigator = createBottomTabNavigator(
+{
+	'Test List': testListNavigator, //Tests that hold all created tests
+	'Add Test': CreateNewTestScreen  //for initially creating tests, tabs are visible
+	
+},
+{
+	initialRouteName: 'Test List'
+});
+
+const selectUserStackNavigator = createStackNavigator(
+{
+	'Home': SelectUserScreen,
+	'AdminTabs':adminTabNavigator,
+	//'UserTabs':userTabNavigator
+	
+},
+{
+	initialRouteName: 'Home'
+});
 
 
-const AppContainer = createAppContainer(RootStack);
+const AppContainer = createAppContainer(selectUserStackNavigator);
 
 export default class App extends React.Component
 {
+	
+	constructor(props)
+	{
+		super(props)
+		this.state = {
+			testList: 
+			[
+			{
+				testID: 1,
+				testName: 'Chetting Around'
+			},
+			{
+				testID: 2,
+				testName: 'Getting Chetted'
+			},
+			{
+				testID: 3,
+				testName: 'Chetlapalouza'
+			},
+			]
+		}
+		
+	}
+	
+	addTestToList = (newTest) => {
+		//this.setState(prevState => ({
+		//	testList:[...prevState.testList, newTest]
+		//}))
+	}
+	
 	render()
 	{
-		return <AppContainer />
+		return <AppContainer screenProps={{testList: this.state.testList}} />
 	}
 	
 }

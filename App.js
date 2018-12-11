@@ -123,20 +123,37 @@ export default class App extends React.Component
 	}
 	
 	addTestToList = (newTest) => {
-		//newTest.testID = this.state.testList.length + 1
-		this.setState(prevState => (
+        temp_test_list = this.state.testList
+        newTest['testID'] = this.getMaxTestID() + 1
+        temp_test_list = [...temp_test_list,newTest]
+
+		this.setState(
 		{
-			testList:[...prevState.testList, newTest]
-		}))
+			testList:[...this.state.testList, newTest]
+        }, 
+        () => {console.log('new state ',this.state)})
+        
+        return true
 	}
-	
+    
+    getMaxTestID = () =>
+    {
+
+        let temp_list = this.state.testList
+        let indexList = temp_list.map(tst => tst.testID)
+        let maxID = Math.max(...indexList)
+        return maxID         
+    }
+
+    
 	render()
 	{
 		return <AppContainer 
 				screenProps={
 					{
 						testList: this.state.testList,
-						addTestToList: this.addTestToList
+						addTestToList: this.addTestToList,
+                        getMaxTestID: this.getMaxTestID
 					}} />
 	}
 	

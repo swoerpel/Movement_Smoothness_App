@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation';
 
 class TestListRow extends React.Component {
   render() {
-    const { testItem,testIndex } = this.props;
+    const {testItem} = this.props;
     return (
       <React.Fragment>
         <TouchableOpacity
@@ -12,13 +12,12 @@ class TestListRow extends React.Component {
             {
               testID: testIndex,
               testName: testItem.testName,
-
             }
           )}>
 		  
           <View style={styles.row}>
             <View style={styles.nameAndNumber}>
-              <Text style={styles.testID}>{testIndex}</Text>
+              <Text style={styles.testID}>{testItem.testID}</Text>
               <Text style={styles.testName}>{testItem.testName}</Text>
             </View>
 

@@ -15,7 +15,7 @@ class AdminTestListScreen extends React.Component {
 		const { screenProps } = this.props;
 		return (
 			<ScrollView>
-				{screenProps.testList.map((testItem, index) => <TestListRow key={index + 1} testItem={testItem} testIndex={index + 1} />)}
+				{screenProps.testList.map((testItem, index) => <TestListRow key={testItem.testID} testItem={testItem}  />)}
 			</ScrollView>
 	);
 	}

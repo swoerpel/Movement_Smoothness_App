@@ -10,23 +10,22 @@ class CreateNewTestScreen extends React.Component {
 	{
 		super(props)
 		this.state = {
-			testID:0,
+			testID: 0,
 			testName:"Cheet",
 			testDuration:"default",
 			testTrials:"default",
 			testDescription:"default"
 		}
-
-		console.log(this.state.duration_label)
 	}
 
 	addTest = () => {
 
-		this.props.navigation.navigate('Test List')
-		console.log(this.props.screenProps.testList.length)
-		console.log(this.props.screenProps.testList)
-		
-		this.props.screenProps.addTestToList(this.state)
+        if (this.props.screenProps.addTestToList(this.state))
+        {
+            console.log('test added: ',this.props.screenProps.testList)
+            this.props.navigation.navigate('Test List')
+            this.setState({testID:0})
+        }	
 	}
 	
 	render() 

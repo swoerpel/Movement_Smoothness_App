@@ -1,33 +1,53 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
-
+import Swipeout from 'react-native-swipeout';
 class TestListRow extends React.Component {
   render() {
     const {testItem} = this.props;
-    return (
-      <React.Fragment>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('test_info_screen',
-            {
-              testID: testIndex,
-              testName: testItem.testName,
-            }
-          )}>
-		  
-          <View style={styles.row}>
-            <View style={styles.nameAndNumber}>
-              <Text style={styles.testID}>{testItem.testID}</Text>
-              <Text style={styles.testName}>{testItem.testName}</Text>
-            </View>
+    return this.renderRow(testItem)
 
-          </View>
-        </TouchableOpacity>
-
-        <View style={styles.divider} />
-      </React.Fragment>
-    );
   }
+  
+  
+    renderRow = (testItem) =>
+    {
+        let swipeBtns = [
+        {
+            text: 'delete',
+            backgroundColor: 'red',
+            underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+            onPress: () => { this.props.removeTest(testItem.testID) }//this.deleteNote(rowData) }
+        }];
+
+        return (
+            <Swipeout right={swipeBtns}
+            autoClose={true}
+            backgroundColor= 'transparent'>
+                    <TouchableOpacity
+                      onPress={() => this.props.navigation.navigate('test_info_screen',
+                        {
+                          testID: testItem.testID,
+                          testName: testItem.testName,
+                        }
+                      )}>
+                      
+                      <View style={styles.row}>
+                        <View style={styles.nameAndNumber}>
+                          <Text style={styles.testID}>{testItem.testID}</Text>
+                          <Text style={styles.testName}>{testItem.testName}</Text>
+                        </View>
+
+                      </View>
+                    </TouchableOpacity>
+
+                    <View style={styles.divider} />
+            
+            
+
+            </Swipeout>
+        )
+    }
 }
 
 const styles = StyleSheet.create({

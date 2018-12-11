@@ -14,12 +14,12 @@ class CreateNewTestScreen extends React.Component {
 			testName:"Cheet",
 			testDuration:"default",
 			testTrials:"default",
-			testDescription:"default"
+			testDescription:"default",
+            trial_data: []
 		}
 	}
 
 	addTest = () => {
-
         if (this.props.screenProps.addTestToList(this.state))
         {
             console.log('test added: ',this.props.screenProps.testList)

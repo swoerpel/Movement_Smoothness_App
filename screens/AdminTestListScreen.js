@@ -15,10 +15,13 @@ class AdminTestListScreen extends React.Component {
 		const { screenProps } = this.props;
 		return (
 			<ScrollView>
-				{screenProps.testList.map((testItem, index) => <TestListRow key={testItem.testID} testItem={testItem}  />)}
+				{screenProps.testList.map((testItem, index) => <TestListRow removeTest={this.props.screenProps.removeTest} key={testItem.testID} testItem={testItem}  />)}
 			</ScrollView>
 	);
 	}
+    
+    
+
 }
 export default AdminTestListScreen
 

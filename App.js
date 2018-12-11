@@ -101,21 +101,24 @@ export default class App extends React.Component
 				testName:"Chetting Around",
 				testDuration:"default",
 				testTrials:"default",
-				testDescription:"default"
+				testDescription:"default",
+                trial_data: []
 			},
 			{
 				testID:2,
 				testName:"Chetack",
 				testDuration:"default",
 				testTrials:"default",
-				testDescription:"default"
+				testDescription:"default",
+                trial_data: []
 			},
 			{
 				testID:3,
 				testName:"Chetlupa",
 				testDuration:"default",
 				testTrials:"default",
-				testDescription:"default"
+				testDescription:"default",
+                trial_data: []
 			},
 			]
 		}
@@ -124,7 +127,10 @@ export default class App extends React.Component
 	
 	addTestToList = (newTest) => {
         temp_test_list = this.state.testList
-        newTest['testID'] = this.getMaxTestID() + 1
+		if (temp_test_list.length === 0)
+			newTest['testID'] = 1
+        else
+            newTest['testID'] = this.getMaxTestID() + 1
         temp_test_list = [...temp_test_list,newTest]
 
 		this.setState(
@@ -134,6 +140,13 @@ export default class App extends React.Component
         () => {console.log('new state ',this.state)})
         
         return true
+	}
+    
+	removeTest = (testID) => {
+		console.log('deleting test number ' + testID.toString())
+		temp_test_list = this.state.testList
+		temp_test_list = temp_test_list.filter(tst => tst.testID != testID)
+		this.setState({testList: temp_test_list})
 	}
     
     getMaxTestID = () =>
@@ -153,6 +166,7 @@ export default class App extends React.Component
 					{
 						testList: this.state.testList,
 						addTestToList: this.addTestToList,
+                        removeTest: this.removeTest,
                         getMaxTestID: this.getMaxTestID
 					}} />
 	}

@@ -27,8 +27,9 @@ class TestListRow extends React.Component {
                     <TouchableOpacity
                       onPress={() => this.props.navigation.navigate('test_info_screen',
                         {
-                          testID: testItem.testID,
-                          testName: testItem.testName,
+                            currentTest: testItem
+                            //testID: testItem.testID,
+                            //testName: testItem.testName,
                         }
                       )}>
                       
@@ -68,10 +69,11 @@ const styles = StyleSheet.create({
   testName: {
     fontSize: 18,
     fontWeight: '500',
+    color:'white'
   },
 
   testID: {
-
+    color:'white'
   },
 
   section: {

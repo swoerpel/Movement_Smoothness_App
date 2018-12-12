@@ -11,11 +11,11 @@ class CreateNewTestScreen extends React.Component {
 		super(props)
 		this.state = {
 			testID: 0,
-			testName:"Cheet",
-			testDuration:"default",
-			testTrials:"default",
-			testDescription:"default",
-            trial_data: []
+			testName:"",
+			testDuration:"",
+			testTrials:"",
+			testDescription:"",
+            trialList: []
 		}
 	}
 

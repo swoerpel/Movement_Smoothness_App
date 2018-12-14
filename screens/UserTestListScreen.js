@@ -3,10 +3,10 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView} from "rea
 import TestListRow from './TestListRow'
 import { Constants } from 'expo'
 
-class AdminTestListScreen extends React.Component {
+class UserTestListScreen extends React.Component {
 	static navigationOptions = () => {
 		return {
-			headerTitle: <View style={styles.title_view}><Text style={styles.title_text}>Test List</Text></View>,
+			headerTitle: <View style={styles.title_view}><Text style={styles.title_text}>User Test List</Text></View>,
             //headerStyle: {height: 35},
             headerStyle: { height: 35 },
 			
@@ -19,19 +19,19 @@ class AdminTestListScreen extends React.Component {
 		return (
 			<ScrollView>
 				{screenProps.testList.map((testItem, index) => 
-                <TestListRow 
-                removeTest={this.props.screenProps.removeTest} 
-                key={testItem.testID} 
-                testItem={testItem}
-                userNavigation={false}/>)}
+                    <TestListRow 
+                        removeTest={this.props.screenProps.removeTest} 
+                        key={testItem.testID} 
+                        testItem={testItem}
+                        userNavigation={true}/>)}
 			</ScrollView>
 	);
 	}
     
-    
+    //#bd4440
 
 }
-export default AdminTestListScreen
+export default UserTestListScreen
 
 const styles = StyleSheet.create({
 	title_view: 

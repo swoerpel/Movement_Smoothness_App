@@ -1,10 +1,15 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, Dimensions } from "react-native";
 import {Alert, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import Swipeout from 'react-native-swipeout';
 import TrialListRow from './TrialListRow'
 
-class TestInfoScreen extends React.Component 
+
+const PADDING = 20
+const MARGIN = 60
+const DEVICE_WIDTH = Dimensions.get('window').width
+
+class UserTestInfoScreen extends React.Component 
 {
     constructor(props)
     {
@@ -21,7 +26,7 @@ class TestInfoScreen extends React.Component
         //title: navigation.state.params.testName,//`${navigation.state.params.title}`
         headerStyle:
         {
-            backgroundColor:'#5b9095',
+            backgroundColor:'#bd4440',
             paddingBottom: 20,
         },
         headerTitle: (<View style={styles.header_view}>
@@ -35,7 +40,11 @@ class TestInfoScreen extends React.Component
     })
     
 
-    
+    runTestNavigation = () =>{
+        
+        this.props.navigation.navigate('run_test_screen', {currentTest:this.state.currentTest})
+        
+    }
 
     
 	render() 
@@ -53,20 +62,18 @@ class TestInfoScreen extends React.Component
                     
                 </View>
                 <View style={styles.title_view}>
-                    <Text style={styles.trials_title_text}>Trials:</Text>
+                    <Text style={styles.trials_title_text}>Trials Completed: {this.state.currentTest.trialList.length} / {this.state.currentTest.maxTrials}</Text>
                 </View>
-                <View style={styles.list_view}>
-                    <ScrollView>
-                    {
-                        this.state.currentTest.trialList.map((T,index) => 
-                        <TrialListRow 
-                            key={T.trialID} 
-                            currentTrial={T}
-                            testID={this.state.currentTest.testID}
-                            removeTrial={this.props.screenProps.removeTrial}/>)
-                        
-                    }
-                    </ScrollView>
+                <View style={styles.run_test_button_view}>
+					<TouchableOpacity
+						onPress={this.runTestNavigation}
+						style={styles.run_button}
+						activeOpacity={1}
+						>
+
+					<Text style={styles.trials_title_text}>Run Test</Text>
+
+					</TouchableOpacity>
                 </View>
                 
 			</View>
@@ -75,7 +82,7 @@ class TestInfoScreen extends React.Component
 	
 	//chet
 }
-export default TestInfoScreen
+export default UserTestInfoScreen
 
 
 
@@ -92,12 +99,14 @@ const styles = StyleSheet.create({
 	title_view:
 	{
 		flex:1,
-        backgroundColor:'#5b9095',
+        backgroundColor:'#bd4440',
         justifyContent: 'center',
         alignItems: 'center'
 	},
-    list_view:
+    run_test_button_view:
 	{
+        justifyContent: 'center',
+        alignItems: 'center',
 		flex:6
 	},
     info_title_view:
@@ -153,5 +162,15 @@ const styles = StyleSheet.create({
 		fontWeight: '600',
 		fontSize: 22,
         paddingBottom:5
-    }
+    },
+  run_button: {
+    height: '50%',
+    width: '80%',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    //marginTop: 40,
+    zIndex: 100,
+    backgroundColor: '#3c6989'
+  },
 })

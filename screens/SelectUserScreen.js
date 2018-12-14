@@ -12,7 +12,7 @@ class SelectUserScreen extends React.Component
 {
 	
 	loginAdmin = () => {
-		this.props.navigation.navigate('test_list_tab', )
+		this.props.navigation.navigate('AdminTabs', )
 	}	
 
 	loginUser = () => {

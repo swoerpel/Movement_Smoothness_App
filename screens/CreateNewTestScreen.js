@@ -15,7 +15,8 @@ class CreateNewTestScreen extends React.Component {
 			testDuration:"",
 			testTrials:"",
 			testDescription:"",
-            trialList: []
+            trialList: [],
+            maxTrials:10
 		}
 	}
 

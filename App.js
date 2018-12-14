@@ -6,8 +6,12 @@ import SelectUserScreen from './screens/SelectUserScreen'
 import AdminTestListScreen from './screens/AdminTestListScreen'
 
 import CreateNewTestScreen from './screens/CreateNewTestScreen'
-import TestInfoScreen from './screens/TestInfoScreen'
+import AdminTestInfoScreen from './screens/AdminTestInfoScreen'
+import UserTestInfoScreen from './screens/UserTestInfoScreen'
 import TrialInfoScreen from './screens/TrialInfoScreen'
+import UserTestListScreen from './screens/UserTestListScreen'
+import RunTestScreen from './screens/RunTestScreen'
+
 
 const styles = StyleSheet.create({
 	tab_text: 
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
 const testListNavigator = createStackNavigator(
 {
 	'test_list_tab': AdminTestListScreen,
-	'test_info_screen': TestInfoScreen,
+	'admin_test_info_screen': AdminTestInfoScreen,
     'trial_info_screen':TrialInfoScreen,
 	'edit_test_screen': CreateNewTestScreen, //for editing existing tests, tabs are hidden when navigating from this page
 },
@@ -30,10 +34,13 @@ const testListNavigator = createStackNavigator(
 });
 
 testListNavigator.navigationOptions = ({navigation}) => {
-	//let tabbarVisible = true;
-	//if (navigation.state.index > 0)
-	//	tabBarVisible = false
-	//return{tabBarVisible}
+	let tabBarVisible = true;
+
+	if (navigation.state.index > 0) 
+	{
+		tabBarVisible = false;
+	}
+	return {tabBarVisible}
 }
 
 const adminTabNavigator = createBottomTabNavigator(
@@ -66,11 +73,49 @@ const adminTabNavigator = createBottomTabNavigator(
 	tabBarOptions: 
 	{
 		activeBackgroundColor:'#b9b9a4',
-		//tabStyle:
-		//{
-		//	backgroundColor: 'black'
-		//}
+
 		
+	}
+
+});
+
+
+const userStackNavigator = createStackNavigator({
+    'user_test_list':UserTestListScreen,
+    'user_test_info_screen':UserTestInfoScreen,
+    'run_test_screen':RunTestScreen
+},
+{
+    initialRouteName: 'user_test_list'
+});
+userStackNavigator.navigationOptions = ({navigation}) => {
+	let tabBarVisible = true;
+
+	if (navigation.state.index > 0) 
+	{
+		tabBarVisible = false;
+	}
+	return {tabBarVisible}
+}
+const userTabNavigator = createBottomTabNavigator( //one tab currently
+{
+	'user_test_list_tab': 
+	{
+		screen: userStackNavigator, //Tests that hold all created tests
+		navigationOptions:
+		{
+			tabBarLabel: (<View style={{alignItems:'center', justifyContent:'center', paddingBottom: 12}}>
+							<Text style={styles.tab_text}>Test List</Text></View>),
+
+		}
+	},
+	
+},
+{
+	initialRouteName: 'user_test_list_tab',
+	tabBarOptions: 
+	{
+		activeBackgroundColor:'#b9b9a4',
 	}
 
 });
@@ -79,7 +124,7 @@ const selectUserStackNavigator = createStackNavigator(
 {
 	'Home': SelectUserScreen,
 	'AdminTabs':adminTabNavigator,
-	//'UserTabs':userTabNavigator
+	'UserTabs':userTabNavigator
 	
 },
 {
@@ -121,6 +166,7 @@ export default class App extends React.Component
                     trialID:4,
                     trialDate:"11-06-2018"
                 }],
+                maxTrials:10
 			},
 			{
 				testID:2,
@@ -128,7 +174,8 @@ export default class App extends React.Component
 				testDuration:"default",
 				testTrials:"default",
 				testDescription:"The Gulf of Sidra Offensive was an offensive of the Second Libyan Civil War. It was launched by the Benghazi Defense Brigades on 11 June 2018[1], and was fought concurrently with the Battle of Derna (2018). The Benghazi Defense Brigades captured Ras Lanuf and Sidra, before the Libyan National Army started a counteroffensive on 17 June[6]. On 21 June, The LNA captured Ras Lanuf and Al Sidra[7]. Hours later, The Benghazi Defense Brigades claimed to capture these cities once again[8][9], but the LNA denied these claims, releasing pictures showing their soldiers within Sidra and Ras Lanuf.[10]",
-                trialList: []
+                trialList: [],
+                maxTrials:10
 			},
 			{
 				testID:3,
@@ -136,7 +183,8 @@ export default class App extends React.Component
 				testDuration:"default",
 				testTrials:"default",
 				testDescription:"default",
-                trialList: []
+                trialList: [],
+                maxTrials:10
 			},
 			]
 		}

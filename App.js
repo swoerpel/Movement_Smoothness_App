@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from "react-navigation";
-
+import moment from 'moment'
 import SelectUserScreen from './screens/SelectUserScreen'
 import AdminTestListScreen from './screens/AdminTestListScreen'
 
@@ -152,21 +152,29 @@ export default class App extends React.Component
                 trialList: [
                 {
                     trialID:1,
-                    trialDate:"12-11-2018"
+                    trialDate: moment("12-11-2018 12:12",'DD/MM/YYYY HH:mm').format('LLL'),
+                    //trialDate:moment("12-11-2018", 'mm-dd-yyyy').format('LLL'),
+                    time_elapsed: '00:52'
                 },
                 {
                     trialID:2,
-                    trialDate:"11-25-2018"
+                    trialDate:"11-25-2018",
+                    trialDate: moment("25-11-2018 06:07",'DD/MM/YYYY HH:mm').format('LLL'),
+                    time_elapsed: '00:30'
                 },
                 {
                     trialID:3,
-                    trialDate:"11-17-2018"
+                    trialDate:"11-17-2018",
+                    trialDate: moment("17-11-2018 10:15",'DD/MM/YYYY HH:mm').format('LLL'),
+                    time_elapsed: '01:12'
                 },
                 {
                     trialID:4,
-                    trialDate:"11-06-2018"
+                    trialDate:"11-06-2018",
+                    trialDate: moment("06-11-2018 11:56",'DD/MM/YYYY HH:mm').format('LLL'),
+                    time_elapsed: '01:32'
                 }],
-                maxTrials:10
+                maxTrials:6
 			},
 			{
 				testID:2,
@@ -236,6 +244,27 @@ export default class App extends React.Component
         return maxID         
     }
 
+    addTrial = (testID, time_string) => 
+    {
+
+        let temp_test_list = this.state.testList
+        let currentTest = temp_test_list.filter( (T) => T.testID == testID )
+        let test_index = temp_test_list.findIndex(obj => obj.testID == testID)
+
+        
+        let trialIndexes = temp_test_list[test_index].trialList.map(tst => tst.trialID)
+        let maxID = Math.max(...trialIndexes)
+        
+        let newTrial = {
+            trialID: maxID + 1,
+            time_elapsed: time_string,
+            trialDate: moment().format('LLL')
+        }
+        console.log(newTrial.trialDate)
+        temp_test_list[test_index].trialList = [...temp_test_list[test_index].trialList, newTrial]
+        this.setState({testList: temp_test_list})
+        
+    }
     
 	render()
 	{
@@ -246,7 +275,8 @@ export default class App extends React.Component
 						addTestToList: this.addTestToList,
                         removeTest: this.removeTest,
                         getMaxTestID: this.getMaxTestID,
-                        removeTrial: this.removeTrial
+                        removeTrial: this.removeTrial,
+                        addTrial: this.addTrial
 					}} />
 	}
 	

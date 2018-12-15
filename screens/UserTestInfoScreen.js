@@ -67,11 +67,12 @@ class UserTestInfoScreen extends React.Component
                 <View style={styles.run_test_button_view}>
 					<TouchableOpacity
 						onPress={this.runTestNavigation}
-						style={styles.run_button}
+						style={this.state.currentTest.trialList.length >= this.state.currentTest.maxTrials ? styles.max_trials_reached_button : styles.run_button }
 						activeOpacity={1}
+                        disabled={ this.state.currentTest.trialList.length >= this.state.currentTest.maxTrials ? true : false}
 						>
 
-					<Text style={styles.trials_title_text}>Run Test</Text>
+					<Text style={styles.trials_title_text}>{this.state.currentTest.trialList.length >= this.state.currentTest.maxTrials ? 'Max trials reached': 'Run Test' }</Text>
 
 					</TouchableOpacity>
                 </View>
@@ -163,14 +164,24 @@ const styles = StyleSheet.create({
 		fontSize: 22,
         paddingBottom:5
     },
-  run_button: {
-    height: '50%',
-    width: '80%',
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    //marginTop: 40,
-    zIndex: 100,
-    backgroundColor: '#3c6989'
-  },
+    run_button: {
+        height: '50%',
+        width: '80%',
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        //marginTop: 40,
+        zIndex: 100,
+        backgroundColor: '#3c6989'
+    },
+    max_trials_reached_button: {
+        height: '50%',
+        width: '80%',
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        //marginTop: 40,
+        zIndex: 100,
+        backgroundColor: '#ccbf92'
+    },
 })

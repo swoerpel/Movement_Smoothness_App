@@ -12,14 +12,17 @@ class RunTestScreen extends React.Component
         this.state = {
             currentTest: this.props.navigation.getParam('currentTest','chet'),
             stopwatchOn: false,
-            milisecs:0,
+
             secs:0,
             mins:0,
-            time_string:'00:00:00',
+            time_string:'00:00',
             intervalObj:0,
            
             
         }
+
+        this.incrementTime = this.incrementTime.bind(this)
+        this.updateStopwatchDisplay = this.updateStopwatchDisplay.bind(this)
         
     }
     
@@ -47,53 +50,70 @@ class RunTestScreen extends React.Component
     toggleStopwatch  = () =>
     {
         
-        this.setState({stopwatchOn: !this.state.stopwatchOn})
-        /*
+        
+        
         if (this.state.stopwatchOn)
         {
-            this.setState({ intervalObj: setInterval(this.incrementTime, 100)})
+            
+            this.setState(
+            {
+                intervalObj: clearInterval(this.state.intervalObj),
+                stopwatchOn: false
+            })
         }
         else
         {
-            this.setState({intervalObj:clearInterval(this.state.intervalObj)})
+            this.setState(
+            { 
+                intervalObj: setInterval(this.incrementTime, 1000),
+                stopwatchOn: true
+            })
         }
-        */
+        
     }
     
-    incrementTime = () =>
+    incrementTime()
     {
-		//Just increments values, does not update stopwatch display
 		if (this.state.stopwatchOn) 
 		{
-			this.setState({milisecs: this.state.milisecs + 10})
-            if (this.state.milisecs == 10)
+			this.setState({secs: this.state.secs + 1})
+           
+            if (this.state.secs == 60)
             {
-                this.setState({milisecs: 0, secs: this.state.secs + 1, })
+                this.setState({secs: 0, mins: this.state.mins + 1, })
                 
             }
-			if (this.state.secs == 60)
-			{
-				this.setState({secs: 0, mins: this.state.mins + 1, })
-			}
+            this.updateStopwatchDisplay()
 
 		}
-        console.log('inc time')
-        this.updateStopwatchDisplay()
-
-     
-
     }
-	updateStopwatchDisplay = () =>
+    
+    
+    
+	updateStopwatchDisplay()
 	{
-        milisecs = this.state.milisecs > 9 ? "" + this.state.milisecs: "0" + this.state.milisecs
-        secs = this.state.secs > 9 ? "" + this.state.secs: "0" + this.state.secs
-        mins = this.state.mins > 9 ? "" + this.state.mins: "0" + this.state.mins
-        this.setState({time_string: (mins + ':' + secs + ':' + milisecs) })
+       
+        secs = this.state.secs > 9 ? "" + this.state.secs : "0" + this.state.secs
+        mins = this.state.mins > 9 ? "" + this.state.mins : "0" + this.state.mins
+        this.setState({time_string: (mins + ':' + secs) })
     }
     
     completeTest = () =>
     {
         
+        this.props.screenProps.addTrial(this.state.currentTest.testID, this.state.time_string)
+        //add trial to list 
+        // increment trial count 
+        // zero timer
+        this.setState({
+            intervalObj: clearInterval(this.state.intervalObj),
+            stopwatchOn: false,
+            secs: 0,
+            mins: 0,
+            time_string: '00:00'
+            
+        })
+        this.props.navigation.goBack()
         
     }
     

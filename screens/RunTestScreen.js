@@ -113,6 +113,7 @@ class RunTestScreen extends React.Component
             time_string: '00:00'
             
         })
+        Alert.alert('Trial Completed')
         this.props.navigation.goBack()
         
     }

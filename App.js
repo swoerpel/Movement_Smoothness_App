@@ -256,10 +256,17 @@ export default class App extends React.Component
         let maxID = Math.max(...trialIndexes)
         
         let newTrial = {
-            trialID: maxID + 1,
+            trialID:1,
             time_elapsed: time_string,
             trialDate: moment().format('LLL')
         }
+        
+        if (trialIndexes.length !== 0)
+        {
+            newTrial['trialID'] = maxID + 1
+        }
+
+
         console.log(newTrial.trialDate)
         temp_test_list[test_index].trialList = [...temp_test_list[test_index].trialList, newTrial]
         this.setState({testList: temp_test_list})

@@ -13,7 +13,7 @@ class TrialListRow extends React.Component {
         return this.renderRow(currentTrial)
 
     }
-    
+    //creates a row displaying trial date and index, with delete swipeout functionality
     renderRow = (currentTrial) =>
     {
         

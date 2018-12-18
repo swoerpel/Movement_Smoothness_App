@@ -26,6 +26,7 @@ class RunTestScreen extends React.Component
         
     }
     
+    //adds a title and styling to header
     static navigationOptions = ({navigation}) => (
     {
         //title: navigation.state.params.testName,//`${navigation.state.params.title}`
@@ -46,7 +47,7 @@ class RunTestScreen extends React.Component
     
 
     
- 
+    //turns on and off the stopwatch
     toggleStopwatch  = () =>
     {
         
@@ -72,6 +73,7 @@ class RunTestScreen extends React.Component
         
     }
     
+    //increments the time if stopwatch is on
     incrementTime()
     {
 		if (this.state.stopwatchOn) 
@@ -89,7 +91,7 @@ class RunTestScreen extends React.Component
     }
     
     
-    
+    //changes  state of time display after increment
 	updateStopwatchDisplay()
 	{
        
@@ -98,6 +100,7 @@ class RunTestScreen extends React.Component
         this.setState({time_string: (mins + ':' + secs) })
     }
     
+    //submits trial to specified test, saves to master list for that test
     completeTest = () =>
     {
         

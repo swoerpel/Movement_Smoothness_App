@@ -20,6 +20,8 @@ class CreateNewTestScreen extends React.Component {
 		}
 	}
 
+    
+    //calls parent Screenprops method to add a test to master list
 	addTest = () => {
         if (this.props.screenProps.addTestToList(this.state))
         {

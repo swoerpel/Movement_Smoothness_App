@@ -21,6 +21,8 @@ class UserTestInfoScreen extends React.Component
         
     }
     
+    
+    //adds title and styling to header
     static navigationOptions = ({navigation}) => (
     {
         //title: navigation.state.params.testName,//`${navigation.state.params.title}`
@@ -39,7 +41,7 @@ class UserTestInfoScreen extends React.Component
         
     })
     
-
+    //navigates to run test screen, sends current test info
     runTestNavigation = () =>{
         
         this.props.navigation.navigate('run_test_screen', {currentTest:this.state.currentTest})

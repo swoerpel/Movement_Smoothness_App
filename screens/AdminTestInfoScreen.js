@@ -16,6 +16,8 @@ class AdminTestInfoScreen extends React.Component
         
     }
     
+    
+    //adds title header and styling
     static navigationOptions = ({navigation}) => (
     {
         //title: navigation.state.params.testName,//`${navigation.state.params.title}`

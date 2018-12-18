@@ -199,6 +199,8 @@ export default class App extends React.Component
 		
 	}
 	
+    
+    //adds a test to the test list
 	addTestToList = (newTest) => {
         temp_test_list = this.state.testList
 		if (temp_test_list.length === 0)
@@ -216,6 +218,7 @@ export default class App extends React.Component
         return true
 	}
     
+    //removes trial from a specific test
     removeTrial = (testID, trialID) =>
     {
         console.log('deleting trial ' + trialID.toString() + ' from test ' + testID.toString())
@@ -227,7 +230,7 @@ export default class App extends React.Component
         this.setState({testList:test_list})
     }
     
-    
+    //removes a test from the list
 	removeTest = (testID) => {
 		console.log('deleting test number ' + testID.toString())
 		temp_test_list = this.state.testList
@@ -235,6 +238,7 @@ export default class App extends React.Component
 		this.setState({testList: temp_test_list})
 	}
     
+    //gets the largest test id for when a new test is created
     getMaxTestID = () =>
     {
 
@@ -243,7 +247,8 @@ export default class App extends React.Component
         let maxID = Math.max(...indexList)
         return maxID         
     }
-
+    
+    //adds a trial to a given test
     addTrial = (testID, time_string) => 
     {
 
@@ -273,6 +278,8 @@ export default class App extends React.Component
         
     }
     
+    
+    //All methods are sent as screenProps to child screens
 	render()
 	{
 		return <AppContainer 

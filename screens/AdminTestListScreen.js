@@ -4,6 +4,7 @@ import TestListRow from './TestListRow'
 import { Constants } from 'expo'
 
 class AdminTestListScreen extends React.Component {
+    //adds title and styling to header
 	static navigationOptions = () => {
 		return {
 			headerTitle: <View style={styles.title_view}><Text style={styles.title_text}>Test List</Text></View>,

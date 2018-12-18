@@ -19,7 +19,7 @@ class TrialInfoScreen extends React.Component
         }
          
     }
-    
+    //adds title and styling to header
 	static navigationOptions = ({navigation}) => {
 		return {
 			headerTitle: (

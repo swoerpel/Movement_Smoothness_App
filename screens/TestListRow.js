@@ -9,9 +9,10 @@ class TestListRow extends React.Component {
 
   }
   
-  
+    //creates test row with delete swipeout functionality
     renderRow = (testItem) =>
     {
+        
         let swipeBtns = [
         {
             text: 'Delete',
